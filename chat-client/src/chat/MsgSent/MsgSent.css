@@ -1,0 +1,16 @@
+.msgSent {
+    background-color: #2E45C4;
+    border-radius: 10px;
+    width: fit-content;
+    max-width: 400px;
+    margin: 10px;
+    align-self: flex-end;
+  }
+  
+  .msgSent__txt {
+    color: white;
+    padding: 7px;
+    font-weight: 100;
+    margin: 0;
+  }
+  

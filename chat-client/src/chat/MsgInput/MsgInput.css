@@ -1,0 +1,33 @@
+.msgInput{
+    display: flex;
+    width: 500px;
+    position: relative;
+    align-items: center;
+    margin-top: 10px;
+    margin-left: 10px;
+    .msgInput__inp{
+        flex: 1;
+        height: 16px;
+        padding: 15px;
+        background-color: #1E2126;
+        border: none;
+        border-radius: 5px;
+        outline: none;
+        color: white;
+    }
+    .msgInput__sendDiv{
+        width: 40px;
+        height: 40px;
+        background-color: #2E45C4;
+        border-radius: 10px;
+        cursor: pointer;
+        position: absolute;
+        right: 2px;
+    }
+    .msgInput__sendicon{
+        color: white;
+        position: relative;
+        bottom: 5%;
+        right: 10%;
+    }
+}

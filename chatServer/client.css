@@ -1,0 +1,13 @@
+html {
+    text-align: center;
+    font-size: 16px;
+  }
+  div {
+    padding: 1rem;
+  }
+  #input {
+    font-size: 16px;
+  }
+  p {
+      font-size: 16px;
+  }

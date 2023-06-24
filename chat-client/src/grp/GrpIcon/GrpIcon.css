@@ -1,0 +1,28 @@
+.profile{
+    width: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+    .profile__imagediv{
+        width: 80px;
+        height: 80px;
+        .profile__imagediv--img{
+            border-radius: 50%;
+            width: 100%;
+            height: 100%;
+        }
+    }
+    .profile__namediv{
+        width: 120px;
+        .profile__namediv--txt{
+            color:white;
+            font-weight: 400;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            text-align: center;
+        }
+    }
+    
+}

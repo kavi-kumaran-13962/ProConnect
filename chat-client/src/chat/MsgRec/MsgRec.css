@@ -1,0 +1,28 @@
+.msgRec {
+    position: relative;
+    background-color: #373E4E;
+    border-radius: 10px;
+    width: fit-content;
+    max-width: 400px;
+    margin: 10px;
+
+  }
+  
+  .msgRec__txt {
+    color: white;
+    padding: 7px;
+    font-weight: 100;
+    margin: 0;
+  }
+  
+  .msgRec img {
+    border-radius: 50%;
+    position: absolute;
+    top: 105%;
+    left: 3%;
+    width: 25px;
+    height: 25px;
+    overflow: hidden;
+    transform: translate(-25px, -25px);
+  }
+  

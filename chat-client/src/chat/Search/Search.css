@@ -1,0 +1,32 @@
+.search{
+    display: flex;
+    width: 300px;
+    position: relative;
+    align-items: center;
+    margin-top: 10px;
+    margin-left: 10px;
+    .search__inp{
+        flex: 1;
+        height: 12px;
+        padding: 15px;
+        background-color: #1E2126;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        outline: none;
+
+    }
+    .search__sendDiv{
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+        position: absolute;
+        right: 2px;
+    }
+    .search__sendicon{
+        color: white;
+        position: relative;
+        bottom: 18%;
+        right: 10%;
+    }
+}

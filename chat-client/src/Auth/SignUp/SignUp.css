@@ -1,0 +1,47 @@
+.signUpContainer{
+    display: flex;
+    height: 100vh;
+    justify-content: center; 
+    align-items: center;
+    flex-direction: column;
+    .signUpContainer__headingContainer{
+        width: 300px;
+        .signUpContainer__headingContainer--txt{
+            color: white;
+            font-weight: 500;
+            text-align: start;
+            width: 150px;
+        }
+    }
+    .signUpContainer__inputContainer{
+        .signUpContainer__inputContainer--inputDiv{
+            margin: 20px;
+        }
+    }
+    .signUpContainer__info{
+        .signUpContainer__info--txt{
+            color: #808080;
+            font-size: 12px;
+        }
+    }
+    .signUpContainer__reg{
+        display: flex;
+        width: 280px;
+        justify-content: space-between;
+        align-items: center;
+        .signUpContainer__reg--txt{
+            color: white;
+            font-weight: 500;
+        }
+    }
+    .signUpContainer__login{
+        .signUpContainer__login--txt{
+            color: #808080;
+            font-size: 12px;
+        }
+        .signUpContainer__login--link{
+            color: white;
+            cursor: pointer;
+        }
+    }
+}

@@ -1,0 +1,41 @@
+.signInContainer{
+    display: flex;
+    height: 100vh;
+    justify-content: center; 
+    align-items: center;
+    flex-direction: column;
+    .signInContainer__headingContainer{
+        width: 300px;
+        .signInContainer__headingContainer--txt{
+            color: white;
+            font-weight: 500;
+            text-align: start;
+            width: 150px;
+        }
+    }
+    .signInContainer__inputContainer{
+        .signInContainer__inputContainer--inputDiv{
+            margin: 20px;
+        }
+    }
+    .signInContainer__reg{
+        display: flex;
+        width: 280px;
+        justify-content: space-between;
+        align-items: center;
+        .signInContainer__reg--txt{
+            color: white;
+            font-weight: 500;
+        }
+    }
+    .signInContainer__login{
+        .signInContainer__login--txt{
+            color: #808080;
+            font-size: 12px;
+        }
+        .signInContainer__login--link{
+            color: white;
+            cursor: pointer;
+        }
+    }
+}
