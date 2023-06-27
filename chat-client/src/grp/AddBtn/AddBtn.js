@@ -1,12 +1,13 @@
 import React from 'react';
 import "./AddBtn.css"
+import { Link } from 'react-router-dom';
 
 const AddBtn = () => {
 
   return (
-    <div>
+    <Link to={'/createGrp'}>
         <button className='addBtn' >+</button>
-    </div>
+    </Link>
   );
 };
 

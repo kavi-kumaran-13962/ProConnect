@@ -1,5 +1,5 @@
 import React from 'react';
-import AuthInput from "../AuthInput/AuthInput"
+import AuthInput from "../../InputWithIcon/InputWithIcon"
 import GoButton from '../GoButton/GoButton';
 import "./SignIn.css"
 function SignIn () {

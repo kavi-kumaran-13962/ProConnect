@@ -11,8 +11,8 @@ import MsgSent from "../chat/MsgSent/MsgSent"
 import ChatList from "../chat/ChatList/ChatList";
 import { Outlet,Route,Routes } from "react-router-dom";
 import MsgList from "../chat/MsgList/MsgList";
-import GrpMsgList from "../chat/GrpMsgList/GrpMsgList";
 import MsgInput from "../chat/MsgInput/MsgInput";
+import GrpMsgList from "../grp/GrpMsgList/GrpMsgList";
 export default function HomeLayout() {
   return (
     <div className="homelayout">
@@ -23,12 +23,6 @@ export default function HomeLayout() {
         <Nav />
       </div>
       <div className="homelayout__body">
-        <div className="homelayout__body--profile">
-          <Profile/>
-        </div>
-        <div className="homelayout__body--search">
-          <Search />
-        </div>
         <div className="homelayout__body--chatList">
         <Outlet/>
         </div>

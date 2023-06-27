@@ -48,31 +48,7 @@
 .homelayout__chat::-webkit-scrollbar-thumb:hover {
   background-color: rgba(0, 0, 0, 0.5);
 }
-.homelayout__body--chatList {
-  margin-top: 10px;
-  margin-left: 10px;
-  height: 60vh;
-  overflow-y: auto;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(0, 0, 0, 0.3) rgba(0, 0, 0, 0.1);
-}
 
-.homelayout__body--chatList::-webkit-scrollbar {
-  width: 6px; /* Adjust the scrollbar width as needed */
-}
-
-.homelayout__body--chatList::-webkit-scrollbar-track {
-  background-color: rgba(0, 0, 0, 0.1);
-}
-
-.homelayout__body--chatList::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.3);
-  border-radius: 3px;
-}
-
-.homelayout__body--chatList::-webkit-scrollbar-thumb:hover {
-  background-color: rgba(0, 0, 0, 0.5);
-}
 
 .homelayout__msgInp{
   position: absolute;

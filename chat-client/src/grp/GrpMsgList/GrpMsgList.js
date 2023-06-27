@@ -1,7 +1,7 @@
 import React from 'react';
-import MsgRec from '../MsgRec/MsgRec';
-import MsgSent from '../MsgSent/MsgSent';
-import ChatHeader from '../ChatHeader/ChatHeader';
+import MsgRec from '../../chat/MsgRec/MsgRec';
+import MsgSent from '../../chat/MsgSent/MsgSent';
+import ChatHeader from '../../chat/ChatHeader/ChatHeader';
 import { useState, useEffect } from 'react';
 
 import "./GrpMsgList.css"
