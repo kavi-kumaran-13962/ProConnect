@@ -3,8 +3,7 @@
     width: 300px;
     position: relative;
     align-items: center;
-    margin-top: 10px;
-    margin-left: 10px;
+    margin: 10px;
     .search__inp{
         flex: 1;
         height: 12px;
@@ -14,7 +13,6 @@
         border: none;
         border-radius: 5px;
         outline: none;
-
     }
     .search__sendDiv{
         width: 40px;

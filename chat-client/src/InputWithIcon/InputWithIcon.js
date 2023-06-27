@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import "./AuthInput.css"
+import "./InputWithIcon.css"
 function AuthInput(props) {
   const { icon, placeholderText } = props;
   return (

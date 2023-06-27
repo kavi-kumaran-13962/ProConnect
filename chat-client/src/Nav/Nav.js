@@ -17,7 +17,7 @@ export default function Nav() {
             className={`nav__li ${activeIndex === 0 ? 'active' : ''}`}
             onClick={() => handleItemClick(0)}
           >
-            <Link className="nav__icon" to="/">
+            <Link className="nav__icon" to="profile">
               <i className={`nav__icon--icon fa fa-user`} />
             </Link>
           </li>

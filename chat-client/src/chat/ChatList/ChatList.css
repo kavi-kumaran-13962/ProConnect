@@ -1,0 +1,23 @@
+.chatList__chats {
+    height: 60vh;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.3) rgba(0, 0, 0, 0.1);
+  }
+  
+  .chatList__chats::-webkit-scrollbar {
+    width: 6px; /* Adjust the scrollbar width as needed */
+  }
+  
+  .chatList__chats::-webkit-scrollbar-track {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  
+  .chatList__chats::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 3px;
+  }
+  
+  .chatList__chats::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
