@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import Chat from "../Chat/Chat";
 import Search from "../Search/Search";
 import "./ChatList.css"
+
 const ChatList = () => {
   const [chats, setChats] = useState([]);
-
+  const [searchResults, setSearchResults] = useState([]);
   useEffect(() => {
     // Fetch data from the API
     // fetch('your-api-endpoint')
@@ -108,20 +109,42 @@ const ChatList = () => {
     setChats(data.data);
   }, []);
 
+  const handleSearch = (searchTerm) => {
+    if (searchTerm === "") {
+      // If search term is empty, reset the search results to show all chats
+      setSearchResults([]);
+    } else {
+      // Filter the chats based on the search term
+      const results = chats.filter((chat) =>
+        chat.username.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setSearchResults(results);
+    }
+  };
+
   return (
     <div className="chatList">
       <div className="chatList__search">
-        <Search />
+        <Search onSearch={handleSearch} />
       </div>
       <div className="chatList__chats">
-        {chats.map((chat) => (
-          <Chat
-            key={chat.user_id}
-            id={chat.user_id}
-            name={chat.username}
-            lastMessage={chat.last_message.content}
-          />
-        ))}
+        {searchResults.length > 0
+          ? searchResults.map((chat) => (
+              <Chat
+                key={chat.user_id}
+                id={chat.user_id}
+                name={chat.username}
+                lastMessage={chat.last_message.content}
+              />
+            ))
+          : chats.map((chat) => (
+              <Chat
+                key={chat.user_id}
+                id={chat.user_id}
+                name={chat.username}
+                lastMessage={chat.last_message.content}
+              />
+            ))}
       </div>
     </div>
   );
