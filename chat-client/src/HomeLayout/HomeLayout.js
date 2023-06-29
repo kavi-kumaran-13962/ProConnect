@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "./HomeLayout.css";
 import Nav from "../Nav/Nav";
 import LogoHeader from "../LogoHeader/LogoHeader";
-import Search from "../chat/Search/Search";
 import Chat from "../chat/Chat/Chat";
 import Profile from "../chat/Profile/Profile";
 import ChatHeader from "../chat/ChatHeader/ChatHeader";
