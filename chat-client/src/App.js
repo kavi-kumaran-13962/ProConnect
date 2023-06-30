@@ -5,7 +5,7 @@ import MsgInput from './chat/MsgInput/MsgInput';
 import MsgRec from './chat/MsgRec/MsgRec'
 import MsgSent  from './chat/MsgSent/MsgSent';
 import Chat from './chat/Chat/Chat';
-import Search from './chat/Search/Search';
+import Search from './Search/Search';
 import Nav from "./Nav/Nav";
 import LogoHeader from "./LogoHeader/LogoHeader"
 import AddBtn from './grp/AddBtn/AddBtn';

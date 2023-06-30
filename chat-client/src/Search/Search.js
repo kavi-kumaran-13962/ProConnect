@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import "./Search.css"
-const Search = () => {
+
+const Search = ({ onSearch }) => {
     const [searchTxt, setsearchTxt] = useState('');
 
     const handleInputChange = (e) => {
@@ -9,6 +10,7 @@ const Search = () => {
 
     const handleSend = () => {
         // Handle sending the searchTxt here
+        onSearch(searchTxt);
         console.log(searchTxt);
         setsearchTxt('');
     };
