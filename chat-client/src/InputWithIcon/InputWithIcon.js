@@ -4,9 +4,9 @@ import "./InputWithIcon.css"
 function AuthInput(props) {
   const { icon, placeholderText } = props;
   return (
-<div class="input-container">
-  <i class={icon}></i>
-  <input class="input-field" type="text" placeholder={placeholderText}/>
+<div className="input-container">
+  <i className={icon}></i>
+  <input className="input-field" type="text" placeholder={placeholderText}/>
 </div>
   );
 }

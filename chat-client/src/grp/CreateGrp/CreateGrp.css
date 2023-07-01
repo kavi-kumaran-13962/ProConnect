@@ -1,0 +1,37 @@
+.createGrp{
+    .createGrp__grpIcon{
+        margin: 0 auto;
+        width: fit-content;
+    }
+    .createGrp__addpartic--txt{
+        color: white;
+        font-weight: 400;
+    }
+    .createGrp__members {
+        height: 40vh;
+        overflow-y: auto;
+        scrollbar-width: thin;
+        scrollbar-color: rgba(0, 0, 0, 0.3) rgba(0, 0, 0, 0.1);
+      }
+      
+      .createGrp__members::-webkit-scrollbar {
+        width: 6px; /* Adjust the scrollbar width as needed */
+      }
+      
+      .createGrp__members::-webkit-scrollbar-track {
+        background-color: rgba(0, 0, 0, 0.1);
+      }
+      
+      .createGrp__members::-webkit-scrollbar-thumb {
+        background-color: rgba(0, 0, 0, 0.3);
+        border-radius: 3px;
+      }
+      
+      .createGrp__members::-webkit-scrollbar-thumb:hover {
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+      .createGrp__go{
+        display: flex;
+        justify-content: center;
+      }
+}

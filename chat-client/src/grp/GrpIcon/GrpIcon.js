@@ -8,7 +8,7 @@ const GrpIcon = () => {
             </div>
             <div className='grpicon__content'>
                 <div className="grpicon__namediv">
-                    <h4 className='grpicon__namediv--txt'>Add Grp Icon</h4>
+                    <h3 className='grpicon__namediv--txt'>Add Grp Icon</h3>
                 </div>
             </div>
         </div>

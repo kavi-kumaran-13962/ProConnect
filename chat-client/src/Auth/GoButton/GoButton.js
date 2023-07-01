@@ -1,12 +1,12 @@
 import React from 'react';
 import "./GoButton.css"
 
-const GoButton = () => {
+const GoButton = ({ handleSubmit }) => {
 
   return (
-    <div>
-        <button className='gobtn' >-&gt;</button>
-    </div>
+    <>
+        <button className='gobtn' onClick={handleSubmit} >-&gt;</button>
+    </>
   );
 };
 
