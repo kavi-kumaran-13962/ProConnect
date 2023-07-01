@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./CreateGrp.css";
 import GrpIcon from "../GrpIcon/GrpIcon";
 import InputWithIcon from "../../InputWithIcon/InputWithIcon";
-import Search from "../../chat/Search/Search";
+import Search from "../../Search/Search";
 import Chat from "../../chat/Chat/Chat";
 import GoButton from "../../Auth/GoButton/GoButton";
 import Member from "../Member/Member";
@@ -11,6 +11,7 @@ const CreateGrp = () => {
   const [members, setMembers] = React.useState([]);
   const [groupName, setGroupName] = React.useState("");
   const [selectedMembers, setSelectedMembers] = React.useState([]);
+  const [searchResults, setSearchResults] = React.useState([]);
 
   const getMembers = async () => {
     // const response = await fetch('https://example.com/api/users');
@@ -21,23 +22,23 @@ const CreateGrp = () => {
       data: [
         {
           user_id: "123",
-          username: "user 1",
+          username: "user",
         },
         {
           user_id: "456",
-          username: "user 1",
+          username: "user1",
         },
         {
           user_id: "789",
-          username: "user 1",
+          username: "user2",
         },
         {
           user_id: "91",
-          username: "user 1",
+          username: "user3",
         },
         {
           user_id: "434",
-          username: "user 1",
+          username: "user4",
         },
         {
           user_id: "438",
@@ -60,6 +61,19 @@ const CreateGrp = () => {
     setSelectedMembers(newMembers);
   };
   
+  const handleSearch = (searchTerm) => {
+    if (searchTerm === "") {
+      // If search term is empty, reset the search results to show all chats
+      setSearchResults([]);
+    } else {
+      // Filter the chats based on the search term
+      const results = members.filter((member) =>
+        member.username.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setSearchResults(results);
+      console.log(results);
+    }
+  };
 
   const handleSubmit = () => {
     const postData = {
@@ -108,10 +122,19 @@ const CreateGrp = () => {
         <h3 className="createGrp__addpartic--txt">Add Participants</h3>
       </div>
       <div className="createGrp__search">
-        <Search />
+        <Search onSearch={handleSearch} />
       </div>
       <div className="createGrp__members">
-        {members.map((member) => (
+        {searchResults.length > 0
+          ? searchResults.map((member) => (
+            <Member
+            key={member.user_id}
+            name={member.username}
+            id={member.user_id}
+            onClick={handleMemberClick}
+          />
+          ))
+        : members.map((member) => (
           <Member
             key={member.user_id}
             name={member.username}
