@@ -1,0 +1,18 @@
+[{
+  "_id": 1,
+  "sender_id": "jaswanth_id",
+  "recipient_id": "kavi_id",
+  "content": "xyz messages",
+  "timestamp": {
+    "$date": "2023-07-02T08:14:49.331Z"
+  }
+},
+{
+  "_id": 2,
+  "sender_id": "jaswanth_id",
+  "recipient_id": "kavi_id",
+  "content": "hello messages",
+  "timestamp": {
+    "$date": "2023-07-02T08:15:36.855Z"
+  }
+}]
