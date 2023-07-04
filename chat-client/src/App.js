@@ -1,5 +1,7 @@
 import './App.css';
 import SignIn from './Auth/SignIn/SignIn'
+import SignUp from './Auth/SignUp/SignUp'
+
 import AuthInput from './InputWithIcon/InputWithIcon';
 import MsgInput from './chat/MsgInput/MsgInput';
 import MsgRec from './chat/MsgRec/MsgRec'
@@ -18,9 +20,13 @@ import GrpMsgList from "./grp/GrpMsgList/GrpMsgList"
 import CreateGrp from "./grp/CreateGrp/CreateGrp"
 import Profile from './chat/Profile/Profile';
 function App() {
+  const token = document.cookie.split("=")[0];
   return (
     <Routes>
-      <Route path="/" element={<HomeLayout/>}>
+      <Route path='/SignIn' element={<SignIn/>}/>
+      <Route path='/SignUp' element={<SignUp/>}/>
+      { token ?
+        <Route path="/" element={<HomeLayout/>}>
         <Route path="chats" element={<ChatList/>}>
           <Route path=":chatId" element={<MsgList/>} />
         </Route>
@@ -29,7 +35,8 @@ function App() {
         </Route>
         <Route path='createGrp' element={<CreateGrp/>}/>
         <Route path='profile' element={<Profile/>}/>
-      </Route>
+      </Route> : <Route path="/" element={<SignIn/>}/>
+      }
     </Routes>
   );
 }
