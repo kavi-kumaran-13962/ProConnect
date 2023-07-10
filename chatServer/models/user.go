@@ -1,8 +1,11 @@
 package models
 
+import (
+	"time"
+)
+
 type User struct {
-	ID       string `bson:"_id,omitempty"`
-	Name     string `bson:"name,omitempty"`
-	Email    string `bson:"email,omitempty"`
-	Password string `bson:"password,omitempty"`
+	Username  string    `bson:"username,omitempty"`
+	Password  string    `bson:"password,omitempty"`
+	CreatedAt time.Time `bson:"created_at,omitempty"`
 }
