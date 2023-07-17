@@ -1,8 +1,13 @@
 package main
 
 import (
+	"chatServer/auth"
+	"chatServer/dm"
+	"chatServer/gm"
+	"chatServer/websocketconnection"
 	"encoding/json"
 	"net/http"
+
 	"github.com/gorilla/sessions"
 	"github.com/gorilla/websocket"
 )
@@ -78,9 +83,6 @@ func handleConnections(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-
-
-
 func main() {
 	// serves client html
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
@@ -98,8 +100,17 @@ func main() {
 		http.ServeFile(w, r, "client.css")
 	})
 	// Handle WebSocket connections at the "/ws" endpoint
-	http.HandleFunc("/ws", handleConnections)
-
+	http.Handle("/ws", auth.JWTMiddleware(http.HandlerFunc(websocketconnection.HandleConnections)))
+	// signup handler
+	http.HandleFunc("/signUp", auth.SignupHandler)
+	// Login Handler
+	http.HandleFunc("/login", auth.LoginHandler)
+	// New endpoint to save direct message data
+	http.HandleFunc("/saveDM", dm.SaveDMHandler)
+	// New endpoint to save direct message data
+	http.HandleFunc("/saveGM", gm.SaveGroupMessageHandler)
+	// Call the function to create the dm collection with schema validation
+	// mongo.CreateDMCollectionValidation()
 	// Start the server on port 8080
 	http.ListenAndServe(":8082", nil)
 }
