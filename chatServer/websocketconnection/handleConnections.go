@@ -1,13 +1,9 @@
-package main
+package websocketconnection
 
 import (
-	"chatServer/auth"
-	"chatServer/dm"
-	"chatServer/websocketconnection"
 	"encoding/json"
 	"net/http"
 
-	"github.com/gorilla/sessions"
 	"github.com/gorilla/websocket"
 )
 
@@ -16,10 +12,7 @@ var upgrader = websocket.Upgrader{}
 // Map to store connections for each client
 var connections = make(map[string]*websocket.Conn)
 
-// Create a new store for session management
-var store = sessions.NewCookieStore([]byte("rTw3$&5z#J%G6f@Kp$7y^9rL"))
-
-func handleConnections(w http.ResponseWriter, r *http.Request) {
+func HandleConnections(w http.ResponseWriter, r *http.Request) {
 	// Upgrade upgrades the HTTP server connection to the WebSocket protocol.
 	conn, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
@@ -80,34 +73,4 @@ func handleConnections(w http.ResponseWriter, r *http.Request) {
 		}
 
 	}
-}
-
-func main() {
-	// serves client html
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		if r.URL.Path == "/" {
-			http.ServeFile(w, r, "client.html")
-		}
-	})
-	// serves client js
-	http.HandleFunc("/client.js", func(w http.ResponseWriter, r *http.Request) {
-		http.ServeFile(w, r, "client.js")
-	})
-	// serves client css file
-	http.HandleFunc("/client.css", func(w http.ResponseWriter, r *http.Request) {
-		http.ServeFile(w, r, "client.css")
-	})
-	// Handle WebSocket connections at the "/ws" endpoint
-	http.Handle("/ws", auth.JWTMiddleware(http.HandlerFunc(websocketconnection.HandleConnections)))
-	// signup handler
-	http.HandleFunc("/signUp", auth.SignupHandler)
-	// Login Handler
-	http.HandleFunc("/login", auth.LoginHandler)
-	// New endpoint to save direct message data
-	http.HandleFunc("/saveDM", dm.SaveDMHandler)
-	// New endpoint to save direct message data
-	// Call the function to create the dm collection with schema validation
-	// mongo.CreateDMCollectionValidation()
-	// Start the server on port 8080
-	http.ListenAndServe(":8082", nil)
 }
