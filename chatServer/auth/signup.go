@@ -1,7 +1,7 @@
 package auth
 
 import (
-	"chatServer/models"
+	"chatServer/dbmodels"
 	"chatServer/mongo"
 	"context"
 	"encoding/json"
@@ -9,11 +9,11 @@ import (
 	"net/http"
 	"time"
 
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"golang.org/x/crypto/bcrypt"
 )
 
-func saveUser(user models.User) error {
-
+func saveUser(user dbmodels.User) error {
 	// Call the ConnectMongoDB function
 	client, err := mongo.ConnectMongoDB()
 	if err != nil {
@@ -22,6 +22,8 @@ func saveUser(user models.User) error {
 	}
 	// Get the collection object
 	collection := client.Database("ProConnect").Collection("User")
+
+	mongo.CreateUniqueUserIndex(*collection)
 
 	// Create a context with a timeout of 10 seconds
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
@@ -39,7 +41,7 @@ func saveUser(user models.User) error {
 func SignupHandler(w http.ResponseWriter, r *http.Request) {
 
 	// Get user details from request body
-	var user models.User
+	var user dbmodels.User
 	err := json.NewDecoder(r.Body).Decode(&user)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
@@ -57,7 +59,7 @@ func SignupHandler(w http.ResponseWriter, r *http.Request) {
 
 	// add createdAt
 	user.CreatedAt = now
-
+	user.Groups = make([]primitive.ObjectID, 0)
 	// Hash the password
 	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(user.Password), bcrypt.DefaultCost)
 	if err != nil {
@@ -74,7 +76,11 @@ func SignupHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
+	// Return a success response
+	response := map[string]string{"message": "User created successfully"}
+	w.Header().Set("Content-Type", "application/json")
 
 	// Successfully created user
 	w.WriteHeader(http.StatusCreated)
+	json.NewEncoder(w).Encode(response)
 }

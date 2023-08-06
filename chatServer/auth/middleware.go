@@ -1,6 +1,7 @@
 package auth
 
 import (
+	"chatServer/Utils"
 	"errors"
 	"net/http"
 
@@ -10,17 +11,12 @@ import (
 // Middleware to check the presence of JWT token and validate that token in every request header
 func JWTMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		// Get the token from the Authorization header
-		authHeader := r.Header.Get("Authorization")
-
-		if authHeader == "" {
-			// Token is not present in the header
-			http.Error(w, "Unauthorized", http.StatusUnauthorized)
+		// Get the bearer token
+		tokenStr, err := Utils.GetBearerToken(r)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusUnauthorized)
 			return
 		}
-
-		// Extract the token from the header
-		tokenStr := authHeader[len("Bearer "):]
 
 		// Validate the token
 		token, err := jwt.Parse(tokenStr, func(token *jwt.Token) (interface{}, error) {
@@ -30,7 +26,7 @@ func JWTMiddleware(next http.Handler) http.Handler {
 			}
 
 			// Get the signing key from a secure location
-			signingKey, err := getSigningKey()
+			signingKey, err := Utils.GetSigningKey()
 			if err != nil {
 				return nil, err
 			}
@@ -48,11 +44,4 @@ func JWTMiddleware(next http.Handler) http.Handler {
 		// Continue with the next handler
 		next.ServeHTTP(w, r)
 	})
-}
-
-func getSigningKey() ([]byte, error) {
-	// Get the signing key from a secure location
-	// ...
-
-	return signingKey, nil
 }

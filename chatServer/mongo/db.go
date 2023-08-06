@@ -3,6 +3,7 @@ package mongo
 import (
 	"context"
 
+	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
@@ -25,7 +26,9 @@ func ConnectMongoDB() (*mongo.Client, error) {
 
 	return client, nil
 }
-
+func GetMongoErrNoDoc() error {
+	return mongo.ErrNoDocuments
+}
 func DisconnectMongoDB(client *mongo.Client) error {
 	// Disconnect from MongoDB
 	err := client.Disconnect(context.Background())
@@ -33,5 +36,18 @@ func DisconnectMongoDB(client *mongo.Client) error {
 		return err
 	}
 
+	return nil
+}
+
+func CreateUniqueUserIndex(collection mongo.Collection) error {
+	// Create a unique constraint on the username field
+	indexModel := mongo.IndexModel{
+		Keys:    bson.D{{Key: "username", Value: 1}},
+		Options: options.Index().SetUnique(true),
+	}
+	_, err := collection.Indexes().CreateOne(context.Background(), indexModel)
+	if err != nil {
+		return err
+	}
 	return nil
 }

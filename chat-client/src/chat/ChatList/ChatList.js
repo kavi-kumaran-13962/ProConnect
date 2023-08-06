@@ -18,90 +18,42 @@ const ChatList = () => {
         {
           user_id: "100",
           username: "user1",
-          last_message: {
-            message_id: "456",
-            sender_id: "123",
-            recipient_id: "789",
-            content: "Hello!",
-            timestamp: "2023-06-13T15:30:00Z",
-          },
+          last_message: "hello"
         },
         {
           user_id: "101",
           username: "user2",
-          last_message: {
-            message_id: "789",
-            sender_id: "789",
-            recipient_id: "123",
-            content: "Hi there!",
-            timestamp: "2023-06-12T10:45:00Z",
-          },
+          last_message:"hello"
         },
         {
           user_id: "102",
           username: "user1",
-          last_message: {
-            message_id: "456",
-            sender_id: "123",
-            recipient_id: "789",
-            content: "Hello!",
-            timestamp: "2023-06-13T15:30:00Z",
-          },
+          last_message: "hello"
         },
         {
           user_id: "103",
           username: "user2",
-          last_message: {
-            message_id: "789",
-            sender_id: "789",
-            recipient_id: "123",
-            content: "Hi there!",
-            timestamp: "2023-06-12T10:45:00Z",
-          },
+          last_message:"hello"
         },
         {
           user_id: "104",
           username: "user1",
-          last_message: {
-            message_id: "456",
-            sender_id: "123",
-            recipient_id: "789",
-            content: "Hello!",
-            timestamp: "2023-06-13T15:30:00Z",
-          },
+          last_message: "hello"
         },
         {
           user_id: "105",
           username: "user2",
-          last_message: {
-            message_id: "789",
-            sender_id: "789",
-            recipient_id: "123",
-            content: "Hi there!",
-            timestamp: "2023-06-12T10:45:00Z",
-          },
+          last_message:"hello"
         },
         {
           user_id: "106",
           username: "user1",
-          last_message: {
-            message_id: "456",
-            sender_id: "123",
-            recipient_id: "789",
-            content: "Hello!",
-            timestamp: "2023-06-13T15:30:00Z",
-          },
+          last_message: "hello"
         },
         {
           user_id: "107",
           username: "user2",
-          last_message: {
-            message_id: "789",
-            sender_id: "789",
-            recipient_id: "123",
-            content: "Hi there!",
-            timestamp: "2023-06-12T10:45:00Z",
-          },
+          last_message:"hello"
         },
       ],
     };
@@ -135,7 +87,7 @@ const ChatList = () => {
                 key={chat.user_id}
                 id={chat.user_id}
                 name={chat.username}
-                lastMessage={chat.last_message.content}
+                lastMessage={chat.last_message}
               />
             ))
           : chats.map((chat) => (
@@ -143,7 +95,7 @@ const ChatList = () => {
                 key={chat.user_id}
                 id={chat.user_id}
                 name={chat.username}
-                lastMessage={chat.last_message.content}
+                lastMessage={chat.last_message}
               />
             ))}
       </div>

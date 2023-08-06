@@ -3,84 +3,11 @@ package main
 import (
 	"chatServer/auth"
 	"chatServer/dm"
+	"chatServer/gm"
+	"chatServer/home"
 	"chatServer/websocketconnection"
-	"encoding/json"
 	"net/http"
-
-	"github.com/gorilla/sessions"
-	"github.com/gorilla/websocket"
 )
-
-var upgrader = websocket.Upgrader{}
-
-// Map to store connections for each client
-var connections = make(map[string]*websocket.Conn)
-
-// Create a new store for session management
-var store = sessions.NewCookieStore([]byte("rTw3$&5z#J%G6f@Kp$7y^9rL"))
-
-func handleConnections(w http.ResponseWriter, r *http.Request) {
-	// Upgrade upgrades the HTTP server connection to the WebSocket protocol.
-	conn, err := upgrader.Upgrade(w, r, nil)
-	if err != nil {
-		println("upgrade failed: ", err)
-		return
-	}
-	// Read the client ID from the URL
-	query := r.URL.Query()
-	clientID := query.Get("client-id")
-	println(clientID)
-	if clientID == "" {
-		println("client ID not found")
-		conn.Close()
-		return
-	}
-	// Add the connection to the map
-	connections[clientID] = conn
-	defer func() {
-		// Remove the connection from the map when it is closed
-		delete(connections, clientID)
-		conn.Close()
-	}()
-	for {
-		// Read a message from the client
-		_, msg, err := conn.ReadMessage()
-		if err != nil {
-			println("read failed:", err)
-			break
-		}
-
-		// Parse the message as a JSON object
-		var message map[string]string
-		err = json.Unmarshal(msg, &message)
-		if err != nil {
-			println("parse failed:", err)
-			break
-		}
-
-		// Get the recipient ID from the message
-		to := message["to"]
-		if to == "" {
-			println("to not found")
-			break
-		}
-		println(connections)
-		// Get the recipient connection from the map
-		toConn, ok := connections[to]
-		if !ok {
-			println("recipient not found")
-			break
-		}
-
-		// Send the message to the recipient
-		err = toConn.WriteMessage(websocket.TextMessage, msg)
-		if err != nil {
-			println("write failed:", err)
-			break
-		}
-
-	}
-}
 
 func main() {
 	// serves client html
@@ -103,9 +30,23 @@ func main() {
 	http.HandleFunc("/signUp", auth.SignupHandler)
 	// Login Handler
 	http.HandleFunc("/login", auth.LoginHandler)
-	// New endpoint to save direct message data
-	http.HandleFunc("/saveDM", dm.SaveDMHandler)
-	// New endpoint to save direct message data
+	// endpoint to save direct message data
+	http.Handle("/sendDM", auth.JWTMiddleware(http.HandlerFunc(dm.SaveDMHandler)))
+	// endpoint to grp message data
+	http.Handle("/sendGM", auth.JWTMiddleware(http.HandlerFunc(gm.SaveGroupMessageHandler)))
+	// endpoint to get all users
+	http.Handle("/users", auth.JWTMiddleware(http.HandlerFunc(gm.GetAllUsers)))
+	// endpoint to create grp
+	http.Handle("/createGrp", auth.JWTMiddleware(http.HandlerFunc(gm.CreateGroupHandler)))
+	// endpoint to get DM List
+	http.Handle("/getDMList", auth.JWTMiddleware(http.HandlerFunc(home.GetDMListHandler)))
+	// endpoint to get GM List
+	http.Handle("/getGMList", auth.JWTMiddleware(http.HandlerFunc(home.GetGroupMessageListHandler)))
+	// endpoint to get group chat
+	http.Handle("/getGMChat", auth.JWTMiddleware(http.HandlerFunc(gm.GetGMChat)))
+	// endpoint to get dm chat
+	http.Handle("/getDMChat", auth.JWTMiddleware(http.HandlerFunc(dm.GetDMChat)))
+
 	// Call the function to create the dm collection with schema validation
 	// mongo.CreateDMCollectionValidation()
 	// Start the server on port 8080

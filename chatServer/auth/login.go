@@ -1,7 +1,8 @@
 package auth
 
 import (
-	"chatServer/models"
+	"chatServer/Utils"
+	"chatServer/dbmodels"
 	"chatServer/mongo"
 	"context"
 	"encoding/json"
@@ -10,11 +11,9 @@ import (
 	"time"
 
 	"github.com/dgrijalva/jwt-go"
+	"go.mongodb.org/mongo-driver/bson"
 	"golang.org/x/crypto/bcrypt"
 )
-
-// JWT signing key (you can change it to your preferred key)
-var signingKey = []byte("your-secret-key")
 
 func loginUser(username, password string) (string, error) {
 	// Call the ConnectMongoDB function
@@ -32,24 +31,35 @@ func loginUser(username, password string) (string, error) {
 	defer cancel()
 
 	// Retrieve the user from the collection
-	var user models.User
-	err = collection.FindOne(ctx, models.User{Username: username}).Decode(&user)
+	var user dbmodels.UserWithId
+	cursor, err := collection.Find(ctx, bson.M{"username": username})
 	if err != nil {
-		return "", fmt.Errorf("invalid username or password")
+		return "", err
+	}
+	defer cursor.Close(ctx)
+
+	if cursor.Next(ctx) {
+		err := cursor.Decode(&user)
+		if err != nil {
+			return "", err
+		}
+	} else {
+		return "", fmt.Errorf("invalid username")
 	}
 
 	// Compare the provided password with the stored hashed password
 	err = bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(password))
 	if err != nil {
-		return "", fmt.Errorf("invalid username or password")
+		return "", fmt.Errorf("wrong password")
 	}
 
 	// Generate a JWT token
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 		"username": user.Username,
 		"exp":      time.Now().Add(time.Hour * 24).Unix(), // Token expiration time (1 day)
+		"userId":   user.UserID,                           // Add the user ID to the token
 	})
-
+	signingKey, _ := Utils.GetSigningKey()
 	// Sign the token with the secret key
 	tokenString, err := token.SignedString(signingKey)
 	if err != nil {
