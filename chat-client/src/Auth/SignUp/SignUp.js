@@ -62,6 +62,7 @@ function SignUp () {
                 <h2 className='signUpContainer__reg--txt' >Register</h2>
                 <GoButton handleSubmit={handleSubmit}/>
             </div>
+            
             <div className='signUpContainer__login'>
                 <p className='signUpContainer__login--txt'>Do you have an account? <Link to={'/SignIn'} className='signUpContainer__login--link'>Login here</Link></p>
             </div>
