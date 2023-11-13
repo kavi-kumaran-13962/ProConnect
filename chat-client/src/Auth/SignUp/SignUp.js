@@ -19,7 +19,7 @@ function SignUp () {
           password
         };
     
-        // Make an API call to sign in the user and get the JWT token.
+      // Make an API call to sign in the user and get the JWT token.
       //   const response = await fetch('/api/signin', {
       //     method: 'POST',
       //     body: JSON.stringify(data)

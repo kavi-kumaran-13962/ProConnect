@@ -68,3 +68,4 @@ func GetGroupMessageListHandler(w http.ResponseWriter, r *http.Request) {
 	// Encode the results as JSON and send them to the client
 	json.NewEncoder(w).Encode(groupMessageLists)
 }
+
