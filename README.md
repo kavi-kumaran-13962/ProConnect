@@ -9,7 +9,7 @@ https://www.figma.com/file/tCCIRIuGmsjfxuSMcF5lq8/Chat-App?type=design&node-id=0
 
 ## Setup
 
-To set up the Musehive application locally, you'll need to run both the server and client components.
+To set up the ProConnect application locally, you'll need to run both the server and client components.
 
 **Server:**
 
