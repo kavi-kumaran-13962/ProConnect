@@ -29,3 +29,8 @@ go run main
 
 ```bash
 npm start
+```
+
+## Matrix homeserver Setup
+
+Dendrite is used here for matrix homeserver. You can install dendrite from [here](https://github.com/matrix-org/dendrite).
