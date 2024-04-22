@@ -34,3 +34,5 @@ npm start
 ## Matrix homeserver Setup
 
 Dendrite is used here for matrix homeserver. You can install dendrite from [here](https://github.com/matrix-org/dendrite).
+
+You have the option to host the server locally and utilize tools like pktriot for public server exposure. Alternatively, if you have access to a router, you can employ its static IP address into your domain's DNS entry.
